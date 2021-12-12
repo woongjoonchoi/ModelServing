@@ -5,6 +5,8 @@ import torch.nn.functional as F
 
 from efficientnet_pytorch import EfficientNet
 
+import transformers
+import torch.nn as nn
 
 class MyEfficientNet(nn.Module) :
     
@@ -19,3 +21,6 @@ class MyEfficientNet(nn.Module) :
         x = self.EFF(x)
         x= F.softmax(x , dim =1)
         return x
+
+
+

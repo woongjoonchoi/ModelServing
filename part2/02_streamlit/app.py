@@ -1,11 +1,8 @@
 import streamlit as st
 
-
-import io
 import os
 import yaml
 
-from PIL import Image
 
 from predict import load_model , get_prediction
 
@@ -21,33 +18,30 @@ root_password = 'password'
 
 
 def main():
-    st.title("Mask Classificatino Demo")
+    st.title("Question Answering Demo")
 
-    with open("config.yaml") as f:
-        config = yaml.load(f , Loader = yaml.FullLoader)
 
+    text_input = st.text_input("'궁금해'를 입력해주세요")    
+
+    st.write("잠시만 기다려주세요 🤗")
     model = load_model()
 
-    model.eval()
 
+    
 
-    uploaded_file = st.file_uploader("Choose image plassde" , type = ["jpg" , "jpeg" , "png"])
+    context_input = st.text_input("context를 입력을 해주세요")
+    answer_input = st.text_input("answer를 입력을 해주세요")
 
+    print(type(context_input))
+    if len(context_input) >0  and len(answer_input) >0 :
 
-    if uploaded_file :
-        image_bytes = uploaded_file.getvalue()
-
-        image = Image.open(io.BytesIO(image_bytes))
-
-        st.image(image, caption = 'Uploadede Imasge')
 
         st.write("Classifiying  don distraction me")
 
-        _,y_hat = get_prediction(model, image_bytes)
+        answer = get_prediction(model, context_input , answer_input)
 
-        label = config['classes'][y_hat.item()]
 
-        st.write(f'label is {label}')
+        st.write(f'answer is {answer}')
 
 
 @cache_on_button_press('Authenticate')
