@@ -10,10 +10,10 @@ import torch
 
 def transform_image(image_bytes : bytes) -> torch.Tensor :
     transform = albumentations.Compose([
-            albumentations.Resize(hegiht =512 , width =384) ,
+            albumentations.Resize(height =512 , width =384) ,
             albumentations.Normalize(mean=(0.5 , 0.5 , 0.5) ,
                                     std = (0.2 ,0.2 ,0.2) ) ,
-            albumentations.pytorch.transform.ToTensorV2()
+            albumentations.pytorch.transforms.ToTensorV2()
         
     ])
     image = Image.open(io.BytesIO(image_bytes))

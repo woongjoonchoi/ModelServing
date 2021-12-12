@@ -24,14 +24,14 @@ def main():
     st.title("Mask Classificatino Demo")
 
     with open("config.yaml") as f:
-        config = yaml.load(f , load = yaml.FullLoader)
+        config = yaml.load(f , Loader = yaml.FullLoader)
 
     model = load_model()
 
     model.eval()
 
 
-    uploaded_file = st.file_uploader("Choose image plase" , type["jpg" , "jpeg" , "png"])
+    uploaded_file = st.file_uploader("Choose image plassde" , type = ["jpg" , "jpeg" , "png"])
 
 
     if uploaded_file :
@@ -39,7 +39,7 @@ def main():
 
         image = Image.open(io.BytesIO(image_bytes))
 
-        st.image(image, caption('Uploadede Imasge'))
+        st.image(image, caption = 'Uploadede Imasge')
 
         st.write("Classifiying  don distraction me")
 
@@ -50,19 +50,21 @@ def main():
         st.write(f'label is {label}')
 
 
-# @cache_on_button_press('Authenticate')
-# def authenticate(password) ->bool :
-#     print(type(password))
-#     return password == root_password
+@cache_on_button_press('Authenticate')
+def authenticate(password) ->bool :
+    print(type(password))
+    return password == root_password
 
-# password  = st.text_input('password' , type="password")
+password  = st.text_input('password' , type="password")
 
 
-# if authenticate(password) :
-#     st.success('you are authenticated')
-#     main()
+if authenticate(password) :
+    st.success('you are authenticated')
+    main()
 
-# else:
-#     st.error('The password is invalid')
+else:
+    st.error('The password is invalid')
 
-main()
+
+# multiple widget
+# main()
